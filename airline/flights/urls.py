@@ -6,5 +6,8 @@ urlpatterns =[
     
     # https://youtu.be/YzP164YANAU?t=4592
     # for every flight to have its own page
-    path("<int:flight_id>",views.flight, name="flight")
+    path("<int:flight_id>",views.flight, name="flight"),
+
+
+
 ]
