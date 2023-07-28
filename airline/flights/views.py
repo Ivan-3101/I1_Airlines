@@ -29,51 +29,32 @@ def flight(request,flight_id):
     })
 
 
-# def book(request,flight_id):
-#     # https://youtu.be/YzP164YANAU?t=5190
-#     # we use post whenever we send data to the page
-#     # whenever we manipulate the state of something or database
-#     # we use "POST"
-#     if request.method == "POST":
-#         # getting the flight requested whose pk is that flight_id
-#         flight = Flight.objects.get(pk=flight_id)
-#         # recall that .get is used whenever we know that only one result will be obtained
-
-#         # Whenver someone submits the form
-#         # we need the flight and passenger info to book the flight
-#         passenger_id = int(request.POST["passenger"])
-#         passenger = Passenger.object.get(pk=passenger_id)
-#         # What this means is that the data about which passenger ID we want to register on this flight is going
-#         # to be passed in via a form with an input field whose name is passenger. The name on any particular input field dictates what name we get--
-#         # is received when a route like this book route is able to process the request from the user.\
-
-#         # So now what I've done is, if the request method is post, meaning someone submitted this form via the post request method,
-#         # I'm first thing flights.objects.get. to get a particular flight, get me the flight with that flight ID.
-#         # And then, I'm getting a passenger. Which passenger am I getting? The one who's pk, their primary key, otherwise known as ID,
-#         # is equal to whatever was submitted via this post form with a name of passenger.
-
-#         passenger.flights.add(flight)
-#         # let's just assume for now that we're able to get a flight
-#         # and get a passenger. Well, how do we access a passenger's flights? I can just say passenger.flights.
-
-#         return HttpResponseRedirect(reverse("flight",args=(flight.id,)))
-
-def book(request, flight_id):
-
-    # For a post request, add a new flight
+def book(request,flight_id):
+    # https://youtu.be/YzP164YANAU?t=5190
+    # we use post whenever we send data to the page
+    # whenever we manipulate the state of something or database
+    # we use "POST"
     if request.method == "POST":
-
-        # Accessing the flight
+        # getting the flight requested whose pk is that flight_id
         flight = Flight.objects.get(pk=flight_id)
+        # recall that .get is used whenever we know that only one result will be obtained
 
-        # Finding the passenger id from the submitted form data
+        # Whenver someone submits the form
+        # we need the flight and passenger info to book the flight
         passenger_id = int(request.POST["passenger"])
-
-        # Finding the passenger based on the id
         passenger = Passenger.objects.get(pk=passenger_id)
+        # What this means is that the data about which passenger ID we want to register on this flight is going
+        # to be passed in via a form with an input field whose name is passenger. The name on any particular input field dictates what name we get--
+        # is received when a route like this book route is able to process the request from the user.\
 
-        # Add passenger to the flight
+        # So now what I've done is, if the request method is post, meaning someone submitted this form via the post request method,
+        # I'm first thing flights.objects.get. to get a particular flight, get me the flight with that flight ID.
+        # And then, I'm getting a passenger. Which passenger am I getting? The one who's pk, their primary key, otherwise known as ID,
+        # is equal to whatever was submitted via this post form with a name of passenger.
+
         passenger.flights.add(flight)
+        # let's just assume for now that we're able to get a flight
+        # and get a passenger. Well, how do we access a passenger's flights? I can just say passenger.flights.
 
-        # Redirect user to flight page
-        return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
+        return HttpResponseRedirect(reverse("flight",args=(flight.id,)))
+
